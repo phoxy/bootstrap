@@ -1,0 +1,11 @@
+{
+  "name": "phoxy/bootstrap",
+  "description": "Little amount of files, required to best phoxy experience",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "require" :
+  {
+    "php": "~5.5",
+    "phoxy/phoxy": "~1.4.1"
+  }
+}
