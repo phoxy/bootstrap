@@ -6,7 +6,7 @@ if (!function_exists('yaml_parse_file') && !function_exists('spyc_load_file'))
 if (!class_exists('\phpa2o\phpa2o'))
   die("Enelar/phpa2o is required for yaml config module");
 
-class config
+class yaml_config
 {
   private $config = false;
   private $predefined = [];
@@ -63,7 +63,7 @@ class config
 
 if (!function_exists('conf'))
 {
-  $config = new config();
+  $config = new yaml_config();
   function conf()
   {
     global $config;

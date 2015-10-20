@@ -37,13 +37,4 @@ phoxy_return_worker::$add_hook_cb = function($that)
 };
 
 
-
-
-
-
-$rpc_string = $_SERVER['REQUEST_URI'];
-if ($rpc_string == '/api/')
-  $rpc_string = '/api/main/Home';
-
-$_GET['api'] = $rpc_string;
 include('phoxy/index.php');

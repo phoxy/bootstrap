@@ -15,11 +15,8 @@ handlers:
   static_files: \1
   upload: .+\.(css|js|ejs)$
 
-- url: /api/.*
-  script: rpc.php
-
 - url: /.*
-  script: engine/coldstart.php
+  script: engine/route.php
 
 skip_files:
 - .git.*
