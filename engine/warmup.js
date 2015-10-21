@@ -6,16 +6,12 @@ var warmup_obj =
   sync_cascade: true,
   OnWaiting: function()
   {
-    phoxy._.EarlyStage.sync_require[0] = "/enjs.js";
-    phoxy._.EarlyStage.sync_require.push("//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js");
+    phoxy._.EarlyStage.async_require[0] = "/enjs.js";
+    phoxy._.EarlyStage.async_require.push("//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js");
     phoxy._.EarlyStage.EntryPoint();
   },
   OnBeforeCompile: function()
   {
-    requirejs.config(
-    {
-      baseUrl: phoxy.config['js_dir'],
-    });
   },
   OnAfterCompile: function()
   {
@@ -38,8 +34,9 @@ var warmup_obj =
   },
   OnBeforeFirstApiCall: function()
   {
-    requirejs.config({baseUrl: phoxy.Config()['js_dir']});
-
+  },
+  OnExecutingInitialClientCode: function()
+  {
     // Enable jquery in EJS context
     var origin_hook = EJS.Canvas.prototype.hook_first;
     EJS.Canvas.prototype.hook_first = function jquery_hook_first()
@@ -69,10 +66,12 @@ else
 
 (function()
 {
-  if (typeof require === 'undefined')
-    return setTimeout(arguments.callee, 50);
-
-  require(['/phoxy/phoxy.js'], function(){});
+  var d = document;
+  var js = d.createElement("script");
+  js.type = "text/javascript";
+  js.src = "/phoxy/phoxy.js";
+  js.setAttribute("async", "");
+  d.head.appendChild(js);
 })();
 
 
