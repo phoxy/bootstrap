@@ -8,7 +8,7 @@ route:
     upload: .+\.(css|js|ejs)$
 
   - url: \/api\/.*
-    script: rpc.php
+    script: engine/rpc.php
 
   - url: \/.*
     script: engine/coldstart.php
