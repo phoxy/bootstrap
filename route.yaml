@@ -1,4 +1,8 @@
 route:
+# forbid hidden files, and parent directory access
+  - url: \/\..*
+    forbid: true
+
   - url: \/enjs.js
     rewrite: vendor/phoxy/enjs/enjs.js
 
@@ -6,19 +10,16 @@ route:
     static: true
 
   - url: \/robots\.txt
-    rewrite: api/utils/robot/robot
+    rewrite: /api/utils/robot/robot
 
   - url: \/sitemap\.xml
-    rewrite: api/utils/robot/sitemap
+    rewrite: /api/utils/robot/sitemap
 
-  - url: \/api?$
-    rewrite: api/main/home
+  - url: \/api\/?$
+    rewrite: /api/main/home
 
   - url: \/api.*
     script: engine/rpc.php
-
-  - url: \/\..*
-    forbid: true
 
   - url: \/.*
     script: engine/coldstart.php
