@@ -31,7 +31,7 @@ var warmup_obj =
         $('.removeafterload').remove();
         return phoxy.ApiRequest("utils/page404");
       }
-      return this.origin.apply(this, arguments);
+      return arguments.callee.origin.apply(this, arguments);
     })
 
     phoxy.Log(3, "Phoxy ready. Starting");
