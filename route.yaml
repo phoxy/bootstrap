@@ -1,14 +1,24 @@
 route:
   - url: \/enjs.js
-    static_files: vendor/phoxy/enjs/enjs.js
-    upload: vendor/phoxy/enjs/enjs.js
+    static: vendor/phoxy/enjs/enjs.js
 
   - url: \/(.+\.(css|js|ejs))$
-    static_files: \1
-    upload: .+\.(css|js|ejs)$
+    static: true
 
-  - url: \/api\/.*
+  - url: \/robots\.txt
+    rewrite: api/utils/robot/robot
+
+  - url: \/sitemap\.xml
+    rewrite: api/utils/robot/sitemap
+
+  - url: \/api?$
+    rewrite: api/main/home
+
+  - url: \/api.*
     script: engine/rpc.php
+
+  - url: \/\..*
+    forbid: true
 
   - url: \/.*
     script: engine/coldstart.php

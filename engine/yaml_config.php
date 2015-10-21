@@ -1,6 +1,6 @@
 <?php
 
-include('../vendor/autoload.php');
+include('vendor/autoload.php');
 if (!function_exists('yaml_parse_file') && !function_exists('spyc_load_file'))
   die("Requirment not met. At least one yaml tool is required. ".__FILE__." ".__LINE__);
 if (!class_exists('\phpa2o\phpa2o'))

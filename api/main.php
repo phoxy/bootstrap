@@ -11,7 +11,7 @@ class main extends api
     ];
   }
 
-  protected function Home()
+  protected function home()
   {
     return
     [
