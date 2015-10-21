@@ -7,7 +7,7 @@ var warmup_obj =
   OnWaiting: function()
   {
     phoxy._.EarlyStage.async_require[0] = "/enjs.js";
-    phoxy._.EarlyStage.async_require.push("//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js");
+    phoxy._.EarlyStage.async_require.push("//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.min.js");
     phoxy._.EarlyStage.EntryPoint();
   },
   OnBeforeCompile: function()

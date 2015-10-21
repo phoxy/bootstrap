@@ -56,8 +56,16 @@ foreach ($route()->route as $route)
       header("HTTP/1.0 404 Not Found");
     else
     {
-      @header('ETag: '.filemtime($route->static));
-      @header('Cache-Control: private, max-age=600');
+      $mtime = gmdate('D, d M Y H:i:s', filemtime($route->static));
+
+      if (@getallheaders()['If-Modified-Since'] == $mtime)
+      {
+        header("HTTP/1.1 304 Not Modified");
+        exit();
+      }
+
+      @header("Last-Modified: $mtime");
+      @header('Cache-Control: public, max-age=600');
 
       if (!PRODUCTION || !isset($route->minify))
         readfile($route->static);
