@@ -20,12 +20,17 @@ function ExceptionParams( &$arr )
 
 $raw = true;
 
-$url = $_GET['url'];
-unset($_GET['url']);
+$url = $_GET['api'];
+unset($_GET['api']);
+
 $exception_query = http_build_query(ExceptionParams($_GET));
 $query = http_build_query($_GET);
+
 if ($query != "")
   $url .= "?{$query}";
+
+// There you could write extended rewrite code
+// For your bussiness purposes
 
 // End of business code
 if ($exception_query != "")
