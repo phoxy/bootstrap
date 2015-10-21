@@ -66,6 +66,7 @@ foreach ($route()->route as $route)
 
       @header("Last-Modified: $mtime");
       @header('Cache-Control: public, max-age=600');
+      @header('Content-Type: '.mime_content_type($route->minify));
 
       if (!PRODUCTION || !isset($route->minify))
         readfile($route->static);
