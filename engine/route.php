@@ -49,6 +49,7 @@ foreach ($route()->route as $route)
     else
     {
       @header('Content-Type: '.finfo_file($route->static));
+      @header('ETag: '.filemtime($route->static));
       readfile($route->static);
     }
     exit();
