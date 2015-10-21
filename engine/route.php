@@ -6,12 +6,24 @@
 // calculate relative paths from document root
 chdir(dirname(__FILE__)."/..");
 
+function RecursiveURLDecode($arr)
+{
+  $ret = [];
+  foreach ($arr as $k => $v)
+    if (is_array($arr[$k]))
+      $ret[$k] = RecursiveURLDecode($arr[$k]);
+    else
+      $ret[$k] = urldecode($arr[$k]);
+
+  return $ret;
+}
+
 function ParseURI($uri)
 {
   @list($path, $qs) = explode("?", $uri, 2);
   parse_str($qs, $urlvars);
 
-  return [$path, $urlvars];
+  return RecursiveURLDecode([$path, $urlvars]);
 }
 
 list($request, $_GET) = ParseURI($_SERVER['REQUEST_URI']);
