@@ -1,8 +1,6 @@
 <?php
 require_once('vendor/autoload.php');
 
-define('PRODUCTION', 0);
-
 if (!PRODUCTION)
 {
   error_reporting(E_ALL);

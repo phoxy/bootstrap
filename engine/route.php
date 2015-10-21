@@ -19,6 +19,8 @@ list($request, $_GET) = ParseURI($_SERVER['REQUEST_URI']);
 require('yaml_config.php');
 $route = new yaml_config('route.yaml');
 
+define('PRODUCTION', $route()->production);
+
 
 foreach ($route()->route as $route)
 {
@@ -48,9 +50,17 @@ foreach ($route()->route as $route)
       header("HTTP/1.0 404 Not Found");
     else
     {
-      @header('Content-Type: '.finfo_file($route->static));
+      $finfo = finfo_open(FILEINFO_MIME_TYPE);
+      @header('Content-Type: '.finfo_file($finfo, $route->static));
       @header('ETag: '.filemtime($route->static));
-      readfile($route->static);
+
+      if (!PRODUCTION || !isset($route->minify))
+        readfile($route->static);
+      else
+      {
+        $file = file_get_contents($route->static);
+        echo \JShrink\Minifier::minify($file);
+      }
     }
     exit();
   }
