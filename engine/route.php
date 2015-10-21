@@ -50,8 +50,7 @@ foreach ($route()->route as $route)
       header("HTTP/1.0 404 Not Found");
     else
     {
-      $finfo = finfo_open(FILEINFO_MIME_TYPE);
-      @header('Content-Type: '.finfo_file($finfo, $route->static));
+      @header('Content-Type: '.finfo_file($route->static));
       @header('ETag: '.filemtime($route->static));
 
       if (!PRODUCTION || !isset($route->minify))

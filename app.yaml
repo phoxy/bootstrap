@@ -7,14 +7,6 @@ api_version: 1
 default_expiration: "10m"
 
 handlers:
-- url: /enjs.js
-  static_files: vendor/phoxy/enjs/enjs.js
-  upload: vendor/phoxy/enjs/enjs.js
-
-- url: /(.+\.(css|js|ejs))$
-  static_files: \1
-  upload: .+\.(css|js|ejs)$
-
 - url: /.*
   script: engine/route.php
 
