@@ -31,4 +31,6 @@ foreach ($route()->route as $route)
   break;
 }
 
-require("../".$route->script);
+// calculate relative paths from document root
+chdir(dirname(__FILE__)."/..");
+require($route->script);
