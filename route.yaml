@@ -1,6 +1,6 @@
 route:
   - url: \/enjs.js
-    static: vendor/phoxy/enjs/enjs.js
+    rewrite: vendor/phoxy/enjs/enjs.js
 
   - url: \/(.+\.(css|js|ejs))$
     static: true

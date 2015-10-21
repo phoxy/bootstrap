@@ -23,7 +23,9 @@ $route = new yaml_config('route.yaml');
 foreach ($route()->route as $route)
 {
   $regexp = $route->url;
+
   $res = preg_match("/$regexp/", $request, $matches);
+
   if ($res === false)
     die("Issues at {$route->url} matching {$request}");
 
@@ -41,8 +43,15 @@ foreach ($route()->route as $route)
     if ($route->static === true)
       $route->static = $request;
 
-    @header('Content-Type: '.finfo_file($route->static));
-    readfile($route->static);
+    $route->static = "./$route->static";
+    if (!file_exists($route->static))
+      header("HTTP/1.0 404 Not Found");
+    else
+    {
+      @header('Content-Type: '.finfo_file($route->static));
+      readfile($route->static);
+    }
+    exit();
   }
 
   if (isset($route->forbid))
