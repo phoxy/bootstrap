@@ -21,6 +21,12 @@ $route = new yaml_config('route.yaml');
 
 define('PRODUCTION', $route()->production);
 
+if (!PRODUCTION)
+{
+  error_reporting(E_ALL);
+  ini_set("display_errors", 1);
+}
+
 
 foreach ($route()->route as $route)
 {
@@ -50,8 +56,8 @@ foreach ($route()->route as $route)
       header("HTTP/1.0 404 Not Found");
     else
     {
-      @header('Content-Type: '.finfo_file($route->static));
       @header('ETag: '.filemtime($route->static));
+      @header('Cache-Control: private, max-age=600');
 
       if (!PRODUCTION || !isset($route->minify))
         readfile($route->static);
