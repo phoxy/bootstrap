@@ -27,6 +27,7 @@ function ParseURI($uri)
 }
 
 list($request, $_GET) = ParseURI($_SERVER['REQUEST_URI']);
+@header("Phoxy-Request: $request");
 
 require('yaml_config.php');
 $route = new yaml_config('route.yaml');
@@ -39,6 +40,7 @@ if (!PRODUCTION)
   ini_set("display_errors", 1);
 }
 
+require('declare.missing.methods.php');
 
 foreach ($route()->route as $route)
 {
@@ -64,6 +66,7 @@ foreach ($route()->route as $route)
       $route->static = $request;
 
     $route->static = "./$route->static";
+
     if (!file_exists($route->static))
       header("HTTP/1.0 404 Not Found");
     else
@@ -76,9 +79,14 @@ foreach ($route()->route as $route)
         exit();
       }
 
+      if (isset($route->mime))
+        $mime = $route->mime;
+      else
+        $mime = mime_content_type($route->minify);
+
       @header("Last-Modified: $mtime");
       @header('Cache-Control: public, max-age=600');
-      @header('Content-Type: '.mime_content_type($route->minify));
+      @header('Content-Type: '.$mime);
 
       if (!PRODUCTION || !isset($route->minify))
         readfile($route->static);
@@ -95,7 +103,6 @@ foreach ($route()->route as $route)
     die("Request forbid for routing");
 }
 
-@header("Phoxy-Request: $request");
 @header("Phoxy-Route: $route->script");
 $_GET['api'] = $request;
 require($route->script);
