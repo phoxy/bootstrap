@@ -11,10 +11,17 @@ route:
     static: true
     compress: true
     minify: true
+    mime: application/javascript
 
-  - url: \/(.+\.(css|ejs))$
+  - url: \/(.+\.css)$
     static: true
     compress: true
+    mime: text/css
+
+  - url: \/(.+\.ejs)$
+    static: true
+    compress: true
+    mime: text/ejs
 
   - url: \/robots\.txt
     rewrite: /api/utils/robot/robot

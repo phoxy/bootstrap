@@ -13,7 +13,7 @@ if (!function_exists('getallheaders'))
   }
 }
 
-if (!function_exists('mime_content_type'))
+if (!function_exists('mime_content_type') && class_exists('finfo'))
 { // http://stackoverflow.com/questions/1263957/why-is-mime-content-type-deprecated-in-php
   function mime_content_type($filename)
   {
