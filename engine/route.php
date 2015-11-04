@@ -10,18 +10,18 @@ function RecursiveURLDecode($arr)
 {
   $ret = [];
   foreach ($arr as $k => $v)
-    if (is_array($arr[$k]))
-      $ret[$k] = RecursiveURLDecode($arr[$k]);
+    if (is_array($v))
+      $ret[$k] = RecursiveURLDecode($v);
     else
-      $ret[$k] = urldecode($arr[$k]);
+      $ret[$k] = urldecode($v);
 
   return $ret;
 }
 
 function ParseURI($uri)
 {
-  @list($path, $qs) = explode("?", $uri, 2);
-  parse_str($qs, $urlvars);
+  @list($path, $querystring) = explode("?", $uri, 2);
+  parse_str($querystring, $urlvars);
 
   return RecursiveURLDecode([$path, $urlvars]);
 }

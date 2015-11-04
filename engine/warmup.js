@@ -78,18 +78,18 @@ else
 // Loading animation
 (function()
 {
-  if (typeof phoxy._ == 'undefined')
+  if (typeof phoxy._ === 'undefined')
     return setTimeout(arguments.callee, 10);
 
   var percents = phoxy._.EarlyStage.LoadingPercentage();
   var element = document.getElementById('percent');
 
-  if (element == null)
+  if (element === null)
     return;
   element.style.width = percents + "px";
   element.style.opacity = percents / 100 + 0.5;
   setTimeout(arguments.callee, 50);
 
-  if (percents == 100)
+  if (percents === 100)
     $('.removeafterload').css('opacity', 0);
 })();

@@ -15,7 +15,7 @@ function phoxy_conf()
   return $ret;
 }
 
-function default_addons( $name )
+function default_addons()
 {
   $ret =
   [
