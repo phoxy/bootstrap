@@ -35,4 +35,4 @@ phoxy_return_worker::$add_hook_cb = function($that)
 };
 
 
-include('phoxy/index.php');
+include('phoxy/load.php');
