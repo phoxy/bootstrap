@@ -34,5 +34,10 @@ phoxy_return_worker::$add_hook_cb = function($that)
     $that->obj['cache'] = 'no';
 };
 
-
-include('phoxy/load.php');
+try
+{
+  include('phoxy/load.php');
+} catch (Exception $e)
+{
+  echo json_encode(["error" => $e->getMessage()]);
+}
