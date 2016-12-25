@@ -25,7 +25,7 @@ function default_addons()
   return $ret;
 }
 
-include('phoxy/phoxy_return_worker.php');
+include('phoxy/server/phoxy_return_worker.php');
 phoxy_return_worker::$add_hook_cb = function($that)
 {
   global $USER_SENSITIVE;
